@@ -26,9 +26,9 @@ svg{position:relative;z-index:1;width:min(94vw,72svh,680px);height:auto;max-heig
 .tag-string{fill:none;stroke:#cfaa78;stroke-width:2;stroke-linecap:round}.tag-paper{fill:#f0dfc5;stroke:#d4b383;stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 3px 4px rgba(9,8,18,.3))}.tag-fold{fill:none;stroke:#d4b383;stroke-width:1}.tag-pour{fill:#765447;font:italic 10px Georgia,serif;text-anchor:middle}.tag-name{fill:#8f4652;font:700 17px Tahoma,Arial,sans-serif;text-anchor:middle;dominant-baseline:middle;direction:rtl;unicode-bidi:bidi-override} #pin .hit{fill:transparent} .ribbon-label{fill:#a64c58;stroke:#f1d2aa;stroke-width:2;stroke-linejoin:round;filter:drop-shadow(0 2px 2px rgba(10,8,18,.3))} .ribbon-text{fill:#fff3e4;font:700 11px Georgia,serif;text-anchor:middle;dominant-baseline:middle;letter-spacing:.7px;pointer-events:none}
 #pin:focus-visible .hit{stroke:#fff0d2;stroke-width:2;stroke-dasharray:4 4}
 #pin.pulled{animation:ribbon-pull 1.55s cubic-bezier(.35,.02,.2,1) forwards;pointer-events:none} @keyframes ribbon-pull{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}16%{transform:translate(-5px,7px) rotate(-9deg) scale(1.06);opacity:1}34%{transform:translate(7px,18px) rotate(14deg) scale(1.08);opacity:1}52%{transform:translate(18px,9px) rotate(-11deg) scale(1.02);opacity:1}72%{transform:translate(43px,-4px) rotate(45deg) scale(.92);opacity:1}100%{transform:translate(142px,-82px) rotate(118deg) scale(.52);opacity:0}} #pin.pulled .ribbon-tail{animation:ribbon-tail-wave 1.25s ease-in-out forwards} @keyframes ribbon-tail-wave{0%,100%{transform:rotate(0) scaleY(1)}28%{transform:rotate(-11deg) scaleY(1.08)}56%{transform:rotate(13deg) scaleY(.94)}78%{transform:rotate(-8deg) scaleY(.82)}}
-@keyframes flash{0%{opacity:.32}100%{opacity:0}}
+.halo{opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}#scene.opening .halo{animation:halo-bloom 1.5s .65s ease-out forwards}#petals{pointer-events:none}.flying-petal{opacity:0;transform-box:fill-box;transform-origin:center;animation:petal-fly var(--duration) ease-out var(--delay) forwards}@keyframes halo-bloom{0%{opacity:0;transform:scale(.72)}55%{opacity:.76;transform:scale(1.04)}100%{opacity:.43;transform:scale(1.1)}}@keyframes petal-fly{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0)}15%{opacity:.95;transform:translate(2px,-5px) scale(1) rotate(14deg)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.55) rotate(var(--turn))}}@keyframes flash{0%{opacity:.32}100%{opacity:0}}
 @media(max-aspect-ratio:1/1){svg{width:min(96vw,680px)}}
-@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.flash.go{animation:none}#pin.pulled{animation:none;transform:translate(80px,-70px) rotate(70deg);opacity:0}#pin.pulled .ribbon-tail{animation:none}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.flash.go{animation:none}#pin.pulled{animation:none;transform:translate(80px,-70px) rotate(70deg);opacity:0}#pin.pulled .ribbon-tail{animation:none}#scene.opening .halo{animation:none;opacity:.4}.flying-petal{display:none}}
 </style>
 </head>
 <body>
@@ -37,9 +37,11 @@ svg{position:relative;z-index:1;width:min(94vw,72svh,680px);height:auto;max-heig
 <audio id="music" src="in the pool.mp3" preload="auto" autoplay loop></audio>
 <main>
 <svg id="scene" viewBox="0 0 400 520" role="group" aria-label="Un bouquet de fleurs avec un ruban à tirer">
-<defs><linearGradient id="pullRibbon" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#913c4b"/><stop offset=".48" stop-color="#d46e74"/><stop offset="1" stop-color="#9c4653"/></linearGradient></defs>
+<defs><linearGradient id="pullRibbon" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#913c4b"/><stop offset=".48" stop-color="#d46e74"/><stop offset="1" stop-color="#9c4653"/></linearGradient><radialGradient id="bloomGlow"><stop offset="0" stop-color="#fff4d2" stop-opacity=".72"/><stop offset=".45" stop-color="#f4b8c4" stop-opacity=".28"/><stop offset="1" stop-color="#bd7edb" stop-opacity="0"/></radialGradient></defs>
+  <circle class="halo" cx="200" cy="270" r="188" fill="url(#bloomGlow)"/>
   <g id="back"></g>
   <g id="front"></g>
+  <g id="petals" aria-hidden="true"></g>
   <path class="tag-string" d="M169 418Q154 414 141 438"/>
   <g class="name-tag" transform="rotate(-5 117 452)">
     <path class="tag-paper" d="M80 423H135L153 440V481H80Z"/>
@@ -204,9 +206,19 @@ function startMusic(){ if(music.paused) music.play().catch(function(){}); }
 startMusic();
 document.addEventListener("pointerdown", startMusic, {once:true});
 document.addEventListener("keydown", startMusic, {once:true});
+function releasePetals(){
+  if(still) return;
+  var group = document.getElementById("petals"), colors = ["#fff8e9","#f3b5bd","#e87983","#f7d27e","#b89ad0"], bits = "";
+  for(var i=0;i<24;i++){
+    var f = F[Math.floor(Math.random()*F.length)], a = Math.random()*6.283, distance = 42+Math.random()*105;
+    var dx = Math.cos(a)*distance, dy = Math.sin(a)*distance-24, turn = (Math.random()-.5)*260;
+    bits += '<ellipse class="flying-petal" cx="'+f.x+'" cy="'+f.y+'" rx="'+(2.4+Math.random()*2.3)+'" ry="'+(5+Math.random()*4)+'" fill="'+colors[i%colors.length]+'" style="--dx:'+dx+'px;--dy:'+dy+'px;--turn:'+turn+'deg;--delay:'+Math.floor(Math.random()*380)+'ms;--duration:'+(1.25+Math.random()*.8)+'s"/>';
+  }
+  group.innerHTML = bits;
+}
 function pull(){
   if(done) return; done = true;
-  pin.classList.add("pulled"); startMusic();
+  pin.classList.add("pulled"); document.getElementById("scene").classList.add("opening"); releasePetals(); startMusic();
   var fl = document.getElementById("flash"); fl.classList.add("go");
   setTimeout(startFestival, 1550);
   document.querySelectorAll(".bud").forEach(function(g, k){
@@ -218,6 +230,9 @@ pin.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e
 </script>
 </body>
 </html>
+
+
+
 
 
 
