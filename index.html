@@ -26,9 +26,9 @@ svg{position:relative;z-index:1;width:min(94vw,72svh,680px);height:auto;max-heig
 .tag-string{fill:none;stroke:#cfaa78;stroke-width:2;stroke-linecap:round}.tag-paper{fill:#f0dfc5;stroke:#d4b383;stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 3px 4px rgba(9,8,18,.3))}.tag-fold{fill:none;stroke:#d4b383;stroke-width:1}.tag-pour{fill:#765447;font:italic 10px Georgia,serif;text-anchor:middle}.tag-name{fill:#8f4652;font:700 17px Tahoma,Arial,sans-serif;text-anchor:middle;dominant-baseline:middle;direction:rtl;unicode-bidi:bidi-override} #pin .hit{fill:transparent} .ribbon-label{fill:#a64c58;stroke:#f1d2aa;stroke-width:2;stroke-linejoin:round;filter:drop-shadow(0 2px 2px rgba(10,8,18,.3))} .ribbon-text{fill:#fff3e4;font:700 11px Georgia,serif;text-anchor:middle;dominant-baseline:middle;letter-spacing:.7px;pointer-events:none}
 #pin:focus-visible .hit{stroke:#fff0d2;stroke-width:2;stroke-dasharray:4 4}
 #pin.pulled{animation:ribbon-pull 1.55s cubic-bezier(.35,.02,.2,1) forwards;pointer-events:none} @keyframes ribbon-pull{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}16%{transform:translate(-5px,7px) rotate(-9deg) scale(1.06);opacity:1}34%{transform:translate(7px,18px) rotate(14deg) scale(1.08);opacity:1}52%{transform:translate(18px,9px) rotate(-11deg) scale(1.02);opacity:1}72%{transform:translate(43px,-4px) rotate(45deg) scale(.92);opacity:1}100%{transform:translate(142px,-82px) rotate(118deg) scale(.52);opacity:0}} #pin.pulled .ribbon-tail{animation:ribbon-tail-wave 1.25s ease-in-out forwards} @keyframes ribbon-tail-wave{0%,100%{transform:rotate(0) scaleY(1)}28%{transform:rotate(-11deg) scaleY(1.08)}56%{transform:rotate(13deg) scaleY(.94)}78%{transform:rotate(-8deg) scaleY(.82)}}
-.halo{opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}#scene.opening .halo{animation:halo-bloom 1.5s .65s ease-out forwards}#petals{pointer-events:none}.flying-petal{opacity:0;transform-box:fill-box;transform-origin:center;animation:petal-fly var(--duration) ease-out var(--delay) forwards}@keyframes halo-bloom{0%{opacity:0;transform:scale(.72)}55%{opacity:.76;transform:scale(1.04)}100%{opacity:.43;transform:scale(1.1)}}@keyframes petal-fly{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0)}15%{opacity:.95;transform:translate(2px,-5px) scale(1) rotate(14deg)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.55) rotate(var(--turn))}}.firefly{opacity:.1;filter:drop-shadow(0 0 5px #ffe29b);animation:firefly-float var(--duration) ease-in-out var(--delay) infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes firefly-float{0%{opacity:.12;transform:translate(0,0) scale(.7)}45%{opacity:.95;transform:translate(var(--dx1),var(--dy1)) scale(1.25)}100%{opacity:.3;transform:translate(var(--dx2),var(--dy2)) scale(.82)}}@keyframes flower-breeze{0%,100%{transform:rotate(10deg) scale(1)}50%{transform:rotate(14deg) scale(1.015)}}@keyframes flash{0%{opacity:.32}100%{opacity:0}}
-@media(max-aspect-ratio:1/1){svg{width:min(96vw,680px)}}
-@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.flash.go{animation:none}#pin.pulled{animation:none;transform:translate(80px,-70px) rotate(70deg);opacity:0}#pin.pulled .ribbon-tail{animation:none}#scene.opening .halo{animation:none;opacity:.4}.flying-petal,.firefly{display:none}.open .head{animation:none;transform:rotate(12deg) scale(1)}}
+.halo{opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}#scene.opening .halo{animation:halo-bloom 1.5s .65s ease-out forwards}#petals{pointer-events:none}.flying-petal{opacity:0;transform-box:fill-box;transform-origin:center;animation:petal-fly var(--duration) ease-out var(--delay) forwards}@keyframes halo-bloom{0%{opacity:0;transform:scale(.72)}55%{opacity:.76;transform:scale(1.04)}100%{opacity:.43;transform:scale(1.1)}}@keyframes petal-fly{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0)}15%{opacity:.95;transform:translate(2px,-5px) scale(1) rotate(14deg)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.55) rotate(var(--turn))}}.firefly{opacity:.1;filter:drop-shadow(0 0 5px #ffe29b);animation:firefly-float var(--duration) ease-in-out var(--delay) infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes firefly-float{0%{opacity:.12;transform:translate(0,0) scale(.7)}45%{opacity:.95;transform:translate(var(--dx1),var(--dy1)) scale(1.25)}100%{opacity:.3;transform:translate(var(--dx2),var(--dy2)) scale(.82)}}@keyframes flower-breeze{0%,100%{transform:rotate(10deg) scale(1)}50%{transform:rotate(14deg) scale(1.015)}}.music-glow{opacity:0;transform-box:fill-box;transform-origin:center;pointer-events:none}#scene.opening .music-glow{opacity:.12;transition:opacity .55s,transform .55s}body.music-light-fallback #scene.opening .music-glow{animation:ambient-light 2.8s ease-in-out infinite}@keyframes ambient-light{0%,100%{opacity:.1;transform:scale(.96)}50%{opacity:.48;transform:scale(1.08)}}@keyframes flash{0%{opacity:.32}100%{opacity:0}}
+@media(max-aspect-ratio:1/1){svg{width:min(96vw,680px)}}@media(max-width:600px){svg{width:min(100vw,680px);max-height:96svh}#sky{opacity:.78}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.flash.go{animation:none}#pin.pulled{animation:none;transform:translate(80px,-70px) rotate(70deg);opacity:0}#pin.pulled .ribbon-tail{animation:none}#scene.opening .halo{animation:none;opacity:.4}.flying-petal,.firefly{display:none}.music-glow{animation:none!important;opacity:.22!important}.open .head{animation:none;transform:rotate(12deg) scale(1)}}
 </style>
 </head>
 <body>
@@ -39,6 +39,7 @@ svg{position:relative;z-index:1;width:min(94vw,72svh,680px);height:auto;max-heig
 <svg id="scene" viewBox="0 0 400 520" role="group" aria-label="Un bouquet de fleurs avec un ruban à tirer">
 <defs><linearGradient id="pullRibbon" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#913c4b"/><stop offset=".48" stop-color="#d46e74"/><stop offset="1" stop-color="#9c4653"/></linearGradient><radialGradient id="bloomGlow"><stop offset="0" stop-color="#fff4d2" stop-opacity=".72"/><stop offset=".45" stop-color="#f4b8c4" stop-opacity=".28"/><stop offset="1" stop-color="#bd7edb" stop-opacity="0"/></radialGradient></defs>
   <circle class="halo" cx="200" cy="270" r="188" fill="url(#bloomGlow)"/>
+  <circle id="musicGlow" class="music-glow" cx="200" cy="270" r="186" fill="url(#bloomGlow)"/>
   <g id="back"></g>
   <g id="front"></g>
   <g id="petals" aria-hidden="true"></g>
@@ -175,13 +176,13 @@ frame();
 function boom(x, y){
   if(still) return;
   var a = COL[Math.floor(Math.random()*COL.length)], b = COL[Math.floor(Math.random()*COL.length)];
-  var count = 84, offset = Math.random()*Math.PI*2;
+  var count = innerWidth<600?56:84, offset = Math.random()*Math.PI*2;
   for(var i=0;i<count;i++){
     var ang = offset + i*6.283/count, sp = 1.8 + Math.random()*4.3;
     if(i%7===0) sp *= .58;
     parts.push({x:x,y:y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:1,decay:.009+Math.random()*.006,size:1.1+Math.random()*1.7,c:i%2?a:b,glow:i%3===0});
   }
-  for(var j=0;j<22;j++){
+  for(var j=0;j<(innerWidth<600?14:22);j++){
     var ang2 = Math.random()*6.283, sp2 = 1+Math.random()*3.2;
     parts.push({x:x,y:y,vx:Math.cos(ang2)*sp2,vy:Math.sin(ang2)*sp2,life:1,decay:.018+Math.random()*.01,size:.7+Math.random()*1.2,c:"#fff0ce",glow:true});
   }
@@ -203,7 +204,35 @@ function startFestival(){
   nextLaunch();
 }
 var pin = document.getElementById("pin"), music = document.getElementById("music"), done = false;
-function startMusic(){ if(music.paused) music.play().catch(function(){}); }
+var audioContext=null, analyser=null, analyserSource=null, audioBins=null, lightStarted=false, lightEnergy=0;
+function fallbackMusicLights(){ document.body.classList.add("music-light-fallback"); }
+function setupMusicLights(){
+  if(lightStarted) return; lightStarted=true;
+  var AudioCtx=window.AudioContext||window.webkitAudioContext;
+  if(location.protocol==="file:" || !AudioCtx){ fallbackMusicLights(); return; }
+  try{
+    audioContext=new AudioCtx(); analyser=audioContext.createAnalyser(); analyser.fftSize=256;
+    analyserSource=audioContext.createMediaElementSource(music);
+    analyserSource.connect(analyser); analyser.connect(audioContext.destination);
+    audioBins=new Uint8Array(analyser.frequencyBinCount); document.body.classList.remove("music-light-fallback"); audioContext.resume().catch(function(){});
+    function animateGlow(){
+      if(!analyser) return;
+      analyser.getByteFrequencyData(audioBins);
+      var sum=0; for(var i=2;i<18;i++) sum+=audioBins[i];
+      lightEnergy=lightEnergy*.82+(sum/(16*255))*.18;
+      var aura=document.getElementById("musicGlow");
+      aura.style.opacity=(.12+lightEnergy*.5).toFixed(2); aura.style.transform="scale("+(.94+lightEnergy*.14)+")";
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+  }catch(e){ analyser=null; fallbackMusicLights(); }
+}
+function startMusic(){
+  if(!music.paused){ setupMusicLights(); return; }
+  var playback=music.play();
+  if(playback&&playback.then) playback.then(setupMusicLights).catch(fallbackMusicLights);
+  else setupMusicLights();
+}
 startMusic();
 document.addEventListener("pointerdown", startMusic, {once:true});
 document.addEventListener("keydown", startMusic, {once:true});
@@ -220,7 +249,7 @@ function releasePetals(){
 function releaseFireflies(){
   if(still) return;
   var group = document.getElementById("fireflies"), bits = "";
-  for(var i=0;i<16;i++){
+  for(var i=0;i<(innerWidth<600?10:16);i++){
     var x=24+Math.random()*352, y=115+Math.random()*300, r=1.3+Math.random()*1.8;
     var dx1=(Math.random()-.5)*24, dy1=(Math.random()-.5)*28, dx2=(Math.random()-.5)*18, dy2=(Math.random()-.5)*22;
     bits += '<circle class="firefly" cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#ffe7a8" style="--dx1:'+dx1+'px;--dy1:'+dy1+'px;--dx2:'+dx2+'px;--dy2:'+dy2+'px;--duration:'+(2.8+Math.random()*3)+'s;--delay:'+Math.random()*2+'s"/>';
@@ -242,6 +271,8 @@ pin.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e
 </script>
 </body>
 </html>
+
+
 
 
 
