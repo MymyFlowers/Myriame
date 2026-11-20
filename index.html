@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un bouquet pour toi</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#f5ead8;--night:#17252b;--wood:#49352a;--gold:#d4ad73;box-sizing:border-box;color-scheme:dark;background:var(--night)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{width:100%;height:100%;margin:0}
+html{background:var(--night);scroll-padding-top:env(safe-area-inset-top,0px)}
+body{position:relative;display:flex;justify-content:center;align-items:center;min-height:100svh;height:100svh;padding:0;overflow:hidden;color:var(--ink);font-family:Georgia,serif;background:radial-gradient(ellipse at 50% 70%,rgba(205,83,114,.2),transparent 42%),radial-gradient(ellipse at 20% 30%,rgba(116,91,190,.17),transparent 28%),linear-gradient(180deg,#101329 0%,#20264a 58%,#694265 100%)}
+body::before{content:"";position:fixed;inset:auto 0 0;height:21vh;background:#11142d;opacity:.7;clip-path:polygon(0 55%,7% 55%,7% 35%,12% 35%,12% 62%,19% 62%,19% 24%,25% 24%,25% 60%,33% 60%,33% 44%,38% 44%,38% 68%,46% 68%,46% 30%,52% 30%,52% 62%,60% 62%,60% 39%,67% 39%,67% 66%,75% 66%,75% 26%,82% 26%,82% 61%,89% 61%,89% 40%,95% 40%,95% 57%,100% 57%,100% 100%,0 100%);pointer-events:none;z-index:0}body::after{content:"";position:fixed;inset:0 0 auto;height:32vh;background:radial-gradient(circle at 13% 48%,rgba(255,205,130,.62) 0 2px,transparent 3px),radial-gradient(circle at 29% 28%,rgba(255,205,130,.5) 0 2px,transparent 3px),radial-gradient(circle at 72% 38%,rgba(255,205,130,.6) 0 2px,transparent 3px),radial-gradient(circle at 89% 24%,rgba(255,205,130,.55) 0 2px,transparent 3px);pointer-events:none;z-index:0}
+#sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.9}
+.flash{position:fixed;inset:0;background:#fff6e7;opacity:0;pointer-events:none;z-index:4}
+.flash.go{animation:flash .7s ease-out}
+main{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;width:100%;height:100%;min-height:0}
+svg{position:relative;z-index:1;width:min(94vw,72svh,680px);height:auto;max-height:94svh;display:block;margin:0;overflow:visible;filter:drop-shadow(0 18px 24px rgba(5,10,12,.38))}
+.stem{fill:none;stroke:#64775a;stroke-width:4;stroke-linecap:round}
+.bud{outline:none}
+.head{transform:scale(.3);transition:transform 1s cubic-bezier(.3,1.7,.5,1);filter:drop-shadow(0 2px 1px rgba(45,22,24,.16))}
+.head path{stroke:#573a37;stroke-opacity:.32;stroke-width:1}
+.open .head{transform:rotate(12deg) scale(1)}
+#pin{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center;transition:opacity .2s} #pin .ribbon-tail{transform-box:fill-box;transform-origin:50% 8%}
+.tag-string{fill:none;stroke:#cfaa78;stroke-width:2;stroke-linecap:round}.tag-paper{fill:#f0dfc5;stroke:#d4b383;stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 3px 4px rgba(9,8,18,.3))}.tag-fold{fill:none;stroke:#d4b383;stroke-width:1}.tag-pour{fill:#765447;font:italic 10px Georgia,serif;text-anchor:middle}.tag-name{fill:#8f4652;font:700 17px Tahoma,Arial,sans-serif;text-anchor:middle;dominant-baseline:middle;direction:rtl;unicode-bidi:bidi-override} #pin .hit{fill:transparent} .ribbon-label{fill:#a64c58;stroke:#f1d2aa;stroke-width:2;stroke-linejoin:round;filter:drop-shadow(0 2px 2px rgba(10,8,18,.3))} .ribbon-text{fill:#fff3e4;font:700 11px Georgia,serif;text-anchor:middle;dominant-baseline:middle;letter-spacing:.7px;pointer-events:none}
+#pin:focus-visible .hit{stroke:#fff0d2;stroke-width:2;stroke-dasharray:4 4}
+#pin.pulled{animation:ribbon-pull 1.55s cubic-bezier(.35,.02,.2,1) forwards;pointer-events:none} @keyframes ribbon-pull{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}16%{transform:translate(-5px,7px) rotate(-9deg) scale(1.06);opacity:1}34%{transform:translate(7px,18px) rotate(14deg) scale(1.08);opacity:1}52%{transform:translate(18px,9px) rotate(-11deg) scale(1.02);opacity:1}72%{transform:translate(43px,-4px) rotate(45deg) scale(.92);opacity:1}100%{transform:translate(142px,-82px) rotate(118deg) scale(.52);opacity:0}} #pin.pulled .ribbon-tail{animation:ribbon-tail-wave 1.25s ease-in-out forwards} @keyframes ribbon-tail-wave{0%,100%{transform:rotate(0) scaleY(1)}28%{transform:rotate(-11deg) scaleY(1.08)}56%{transform:rotate(13deg) scaleY(.94)}78%{transform:rotate(-8deg) scaleY(.82)}}
+@keyframes flash{0%{opacity:.32}100%{opacity:0}}
+@media(max-aspect-ratio:1/1){svg{width:min(96vw,680px)}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.flash.go{animation:none}#pin.pulled{animation:none;transform:translate(80px,-70px) rotate(70deg);opacity:0}#pin.pulled .ribbon-tail{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="flash" id="flash"></div>
+<audio id="music" src="in the pool.mp3" preload="auto" autoplay loop></audio>
+<main>
+<svg id="scene" viewBox="0 0 400 520" role="group" aria-label="Un bouquet de fleurs avec un ruban à tirer">
+<defs><linearGradient id="pullRibbon" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#913c4b"/><stop offset=".48" stop-color="#d46e74"/><stop offset="1" stop-color="#9c4653"/></linearGradient></defs>
+  <g id="back"></g>
+  <g id="front"></g>
+  <path class="tag-string" d="M169 418Q154 414 141 438"/>
+  <g class="name-tag" transform="rotate(-5 117 452)">
+    <path class="tag-paper" d="M80 423H135L153 440V481H80Z"/>
+    <path class="tag-fold" d="M135 423V440H153"/>
+    <circle cx="141" cy="439" r="2.4" fill="#8e624f"/>
+    <text class="tag-pour" x="114" y="451">Pour</text>
+    <text class="tag-name" x="114" y="471" lang="ar" direction="rtl">مريم</text>
+  </g>  <g id="pin" role="button" tabindex="0" aria-label="Tirer le ruban pour ouvrir le bouquet">
+  <path class="ribbon-tail" d="M190 419Q200 425 210 419L208 477L200 488L192 477Z" fill="url(#pullRibbon)"/>
+  <path d="M194 426L195 472" fill="none" stroke="#f1adb0" stroke-opacity=".62" stroke-width="2" stroke-linecap="round"/>
+  <path class="ribbon-label" d="M154 438L162 430H238L246 438V461L238 469H162L154 461Z"/>
+  <text class="ribbon-text" x="200" y="451">tire-moi</text>
+  <rect class="hit" x="148" y="416" width="104" height="76" rx="12"/>
+</g></svg>
+</main>
+<script>
+var seed = 11;
+function r(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+function petal(L, w){
+  var a = w*L*(1+r()*.25), b = w*L*(1+r()*.25), t = L*(.96+r()*.08);
+  return "M0 0C"+(-a)+" "+(-L*.3)+" "+(-a*.6)+" "+(-t)+" 0 "+(-t)+"C"+(b*.6)+" "+(-t)+" "+b+" "+(-L*.3)+" 0 0Z";
+}
+var F = [
+  {t:"daisy",x:200,y:92,L:38,c:"#fff9e9",k:"#d6aa52"},
+  {t:"rose",x:140,y:132,L:32,c:"#d87878",i:"#f1a19a"},
+  {t:"tulip",x:264,y:152,L:35,c:"#a94f56",i:"#df8d87"},
+  {t:"hyd",x:96,y:182,L:29,c:"#9a7892",i:"#c0a2b5"},
+  {t:"rose",x:306,y:186,L:29,c:"#e7a09b",i:"#f4c4b4"},
+  {t:"daisy",x:190,y:172,L:31,c:"#fff9ef",k:"#d7ad61"},
+  {t:"daisy",x:62,y:252,L:25,c:"#fffdf2",k:"#d6aa52"},
+  {t:"lav",x:340,y:268,L:33,c:"#8d6d8d",i:"#c2a3bb"},
+  {t:"tulip",x:124,y:248,L:31,c:"#d97678",i:"#f2b3a9"},
+  {t:"hyd",x:272,y:238,L:27,c:"#c47b83",i:"#edb1ad"},
+  {t:"daisy",x:204,y:256,L:27,c:"#fff9eb",k:"#d4a54d"},
+  {x:240,y:206,L:26,n:11,w:.18,c:"#aa7188",i:"#d3a0b0",k:"#463036"},
+  {t:"daisy",x:158,y:208,L:24,c:"#fffdf5",k:"#d6aa52"}
+];
+var T = {x:200,y:372}, back = "", front = "";
+F.forEach(function(f){
+  var cx = (T.x+f.x)/2 + (f.x<200?-10:10), cy = (T.y+f.y)/2;
+  back += '<path class="stem" d="M200 372Q'+cx+' '+cy+' '+f.x+' '+f.y+'"/>';
+});
+// brins de verdure
+[[172,150],[228,140],[352,190],[48,196]].forEach(function(e){
+  var cx = (200+e[0])/2, cy = (372+e[1])/2, s = "";
+  back += '<path class="stem" style="stroke-width:3" d="M200 372Q'+cx+' '+cy+' '+e[0]+' '+e[1]+'"/>';
+  for(var t=.55;t<=1;t+=.06){
+    var u=1-t, x=u*u*200+2*u*t*cx+t*t*e[0], y=u*u*372+2*u*t*cy+t*t*e[1];
+    s += '<circle cx="'+(x+(r()-.5)*8)+'" cy="'+(y+(r()-.5)*8)+'" r="'+(2.5+r()*1.5)+'" fill="'+(r()>.5?"#71815D":"#9A9A69")+'"/>';
+  }
+  back += s;
+});
+// papier, feuilles, ruban
+back += '<path d="M108 344Q200 366 292 344L222 502Q200 512 178 502Z" fill="#775c4c"/>';
+back += '<g transform="translate(188 362) rotate(205)"><path d="M0 0C20-24 60-26 84 0C60 26 20 24 0 0Z" fill="#536247"/></g>';
+back += '<g transform="translate(212 362) rotate(-25)"><path d="M0 0C20-24 60-26 84 0C60 26 20 24 0 0Z" fill="#687953"/></g>';
+back += '<path d="M124 358Q200 378 276 358L216 504Q200 513 184 504Z" fill="#e4d2b8"/>';
+back += '<path d="M200 374L200 508L216 504L276 358Q240 370 200 374Z" fill="#614d42" fill-opacity=".12"/>';
+back += '<path d="M148 408Q200 426 252 408L249 424Q200 442 151 424Z" fill="#92454d"/>';
+back += '<ellipse cx="176" cy="414" rx="16" ry="9" fill="#92454d" transform="rotate(-18 176 414)"/><ellipse cx="224" cy="414" rx="16" ry="9" fill="#92454d" transform="rotate(18 224 414)"/>';
+F.forEach(function(f, k){
+  var p = "", q = "", j, a, d;
+  if(f.t==="daisy"){
+    for(j=0;j<12;j++) p += '<ellipse cx="0" cy="'+(-f.L*.48)+'" rx="'+(f.L*.17)+'" ry="'+(f.L*.51)+'" fill="'+f.c+'" transform="rotate('+(j*30)+')"/>';
+    p += '<circle r="'+(f.L*.25)+'" fill="'+f.k+'"/><circle r="'+(f.L*.15)+'" fill="#f5d986"/>';
+  } else if(f.t==="rose"){
+    p = '<circle r="'+f.L+'" fill="'+f.c+'"/>';
+    for(j=1;j<5;j++) p += '<circle cx="'+((r()-.5)*f.L*.22)+'" cy="'+((r()-.5)*f.L*.22)+'" r="'+(f.L*(1-j*.19))+'" fill="'+(j%2?f.i:f.c)+'"/>';
+    p += '<path d="M-6 -2Q0 -9 6 -2Q2 6 -4 3" fill="none" stroke="#563F37" stroke-opacity=".45" stroke-width="1.2"/>';
+  } else if(f.t==="tulip"){
+    p = '<path d="'+petal(f.L,.5)+'" fill="'+f.c+'" transform="rotate(-18)"/><path d="'+petal(f.L,.5)+'" fill="'+f.c+'" transform="rotate(18)"/><path d="'+petal(f.L*1.05,.46)+'" fill="'+f.i+'"/>';
+  } else if(f.t==="lav"){
+    for(j=0;j<10;j++){ a = j%2?-4:4; p += '<ellipse cx="'+a+'" cy="'+(-j*f.L*.17)+'" rx="5" ry="7" fill="'+(j%3?f.c:f.i)+'" transform="rotate('+(a*4)+' '+a+' '+(-j*f.L*.17)+')"/>'; }
+  } else if(f.t==="hyd"){
+    for(j=0;j<16;j++){
+      a = j*2.4; d = f.L*Math.sqrt((j+.5)/16)*.95;
+      p += '<g transform="translate('+(Math.cos(a)*d)+' '+(Math.sin(a)*d)+')" fill="'+(j%3?f.c:f.i)+'"><circle cx="-3.5" r="4"/><circle cx="3.5" r="4"/><circle cy="-3.5" r="4"/><circle cy="3.5" r="4"/><circle r="1.8" fill="#F4D35E"/></g>';
+    }
+  } else if(f.t==="gyp"){
+    for(j=0;j<26;j++){
+      a = j*2.4; d = f.L*Math.sqrt((j+.5)/26);
+      p += '<circle cx="'+(Math.cos(a)*d)+'" cy="'+(Math.sin(a)*d)+'" r="'+(1.6+r()*1.6)+'" fill="'+f.c+'"/>';
+    }
+  }
+  for(var i=0;i<(f.t?0:f.n);i++){
+    var ang = i*360/f.n;
+    p += '<path d="'+petal(f.L,f.w)+'" fill="'+f.c+'" transform="rotate('+ang+')"/>';
+    q += '<path d="'+petal(f.L*.62,f.w*1.1)+'" fill="'+f.i+'" transform="rotate('+(ang+180/f.n)+')"/>';
+  }
+  front += '<g transform="translate('+f.x+' '+f.y+')"><g class="bud" data-k="'+k+'"><g class="head">'+p+q+(f.t?'':'<circle r="'+(f.L*.26)+'" fill="'+f.k+'"/>')+'</g></g></g>';
+});
+document.getElementById("back").innerHTML = back;
+document.getElementById("front").innerHTML = front;
+
+// Ciel : pluie + feux d'artifice
+var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var cv = document.getElementById("sky"), c = cv.getContext("2d"), W, H, drops = [], parts = [], rockets = [];
+var COL = ["#ff477e","#ffc64b","#62dbd1","#a276ff","#fff0c8","#ff705c"];
+function size(){
+  var d = Math.min(window.devicePixelRatio||1, 2); W = innerWidth; H = innerHeight;
+  cv.width = W*d; cv.height = H*d; c.setTransform(d,0,0,d,0,0);
+}
+size(); addEventListener("resize", size);
+for(var i=0;i<85;i++) drops.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight*.72,r:.4+Math.random()*1.3,phase:Math.random()*6.28,speed:.01+Math.random()*.025});
+function frame(){
+  c.clearRect(0,0,W,H);
+  drops.forEach(function(d){
+    if(!still) d.phase += d.speed;
+    c.globalAlpha = .12 + (Math.sin(d.phase)+1)*.16;
+    c.fillStyle = "#fff0d6"; c.beginPath(); c.arc(d.x,d.y,d.r,0,6.283); c.fill();
+  });
+  for(var ri=rockets.length-1;ri>=0;ri--){
+    var q = rockets[ri], px = q.x, py = q.y;
+    q.x += q.vx; q.y += q.vy; q.vy += .035;
+    c.globalAlpha = 1; c.strokeStyle = q.c; c.lineWidth = 2.4; c.shadowBlur = 14; c.shadowColor = q.c; c.beginPath();
+    c.moveTo(px,py+4); c.lineTo(q.x,q.y); c.stroke();
+    if(Math.random()<.72) parts.push({x:q.x,y:q.y+3,vx:(Math.random()-.5)*.8,vy:.6+Math.random()*1.8,life:.6,decay:.035,size:.9+Math.random(),c:q.c,glow:true});
+    if(q.y<=q.targetY || q.vy>=-.5){ boom(q.x,q.y); rockets.splice(ri,1); }
+  }
+  for(var i=parts.length-1;i>=0;i--){
+    var p = parts[i];
+    c.strokeStyle = p.c; c.globalAlpha = Math.max(p.life,0); c.lineWidth = Math.max(.7,p.size*p.life); c.shadowBlur = p.glow ? 12 : 3; c.shadowColor = p.c; c.beginPath();
+    c.moveTo(p.x, p.y); p.vy += .035; p.vx *= .986; p.x += p.vx; p.y += p.vy; c.lineTo(p.x, p.y); c.stroke();
+    p.life -= p.decay; if(p.life <= 0) parts.splice(i,1);
+  }
+  c.globalAlpha = 1; c.shadowBlur = 0;
+  if(!still) requestAnimationFrame(frame);
+}
+frame();
+function boom(x, y){
+  if(still) return;
+  var a = COL[Math.floor(Math.random()*COL.length)], b = COL[Math.floor(Math.random()*COL.length)];
+  var count = 84, offset = Math.random()*Math.PI*2;
+  for(var i=0;i<count;i++){
+    var ang = offset + i*6.283/count, sp = 1.8 + Math.random()*4.3;
+    if(i%7===0) sp *= .58;
+    parts.push({x:x,y:y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:1,decay:.009+Math.random()*.006,size:1.1+Math.random()*1.7,c:i%2?a:b,glow:i%3===0});
+  }
+  for(var j=0;j<22;j++){
+    var ang2 = Math.random()*6.283, sp2 = 1+Math.random()*3.2;
+    parts.push({x:x,y:y,vx:Math.cos(ang2)*sp2,vy:Math.sin(ang2)*sp2,life:1,decay:.018+Math.random()*.01,size:.7+Math.random()*1.2,c:"#fff0ce",glow:true});
+  }
+}
+
+var festivalActive = false;
+function launchRocket(){
+  var x = W*(.12+Math.random()*.76), targetY = H*(.12+Math.random()*.4);
+  rockets.push({x:x,y:H+8,vx:(Math.random()-.5)*.8,vy:-(5.2+Math.random()*1.8),targetY:targetY,c:COL[Math.floor(Math.random()*COL.length)]});
+}
+function startFestival(){
+  if(still || festivalActive) return;
+  festivalActive = true;
+  function nextLaunch(){
+    if(!festivalActive) return;
+    launchRocket();
+    setTimeout(nextLaunch,850+Math.random()*650);
+  }
+  nextLaunch();
+}
+var pin = document.getElementById("pin"), music = document.getElementById("music"), done = false;
+function startMusic(){ if(music.paused) music.play().catch(function(){}); }
+startMusic();
+document.addEventListener("pointerdown", startMusic, {once:true});
+document.addEventListener("keydown", startMusic, {once:true});
+function pull(){
+  if(done) return; done = true;
+  pin.classList.add("pulled"); startMusic();
+  var fl = document.getElementById("flash"); fl.classList.add("go");
+  setTimeout(startFestival, 1550);
+  document.querySelectorAll(".bud").forEach(function(g, k){
+    setTimeout(function(){ g.classList.add("open"); }, still ? 0 : 470 + k*62);
+  });
+}
+pin.addEventListener("click", pull);
+pin.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); pull(); } });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
